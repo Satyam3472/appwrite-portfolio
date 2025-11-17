@@ -1,7 +1,7 @@
 # 👋 Hi, I'm **Kumar Satyam**
 
 🎯 **META-certified Software Engineer**  
-💻 **Full Stack Developer (React | Next.js | Node.js | TypeScript | Docker)**  
+💻 **Full Stack Developer (React | Next.js | Node.js | React Native | TypeScript | Docker)**  
 📍 Pune, India  
 📞 +91 8298380149 • 📧 ksatyam4199@gmail.com  
 🔗 [Portfolio](https://ksatyam.online) • [LinkedIn](https://linkedin.com/in/ksatyam4199) • [GitHub](https://github.com/Satyam3472)
