@@ -12,12 +12,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Default Variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
+
+/* Dark Mode Variables (Class-based) */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* Enable dark mode variant based on .dark class */
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   background: var(--background);
