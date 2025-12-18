@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppBackground } from "./components/app-background";
 import { ThemeProvider } from "./components/theme-provider";
+import { portfolioData } from "./portfolio-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,26 +15,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ksatyam.online"),
-  title: "Kumar Satyam — Full-Stack Developer | Portfolio",
-  description:
-    "Portfolio of Kumar Satyam — META-certified Software Engineer with 3.8 years experience in React.js, Next.js, Node.js, TypeScript & Docker. Senior Solutions Developer at Tata Technologies building scalable apps, APIs & enterprise solutions.",
+  metadataBase: new URL(`https://${portfolioData.personalInfo.website}`),
+  title: `${portfolioData.personalInfo.name} — ${portfolioData.personalInfo.title} | Portfolio`,
+  description: portfolioData.personalInfo.objective,
   keywords: [
-    "Kumar Satyam",
+    portfolioData.personalInfo.name,
+    portfolioData.personalInfo.title,
+    ...portfolioData.skills.frontEnd,
+    ...portfolioData.skills.backEnd,
     "Software Engineer",
     "Full Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Node.js Developer",
-    "Frontend Developer",
-    "META Certified Developer",
     "Portfolio",
-    "Tata Technologies",
   ],
-  authors: [{ name: "Kumar Satyam", url: "https://ksatyam.online" }],
-  creator: "Kumar Satyam",
-  publisher: "Kumar Satyam",
+  authors: [{ name: portfolioData.personalInfo.name, url: `https://${portfolioData.personalInfo.website}` }],
+  creator: portfolioData.personalInfo.name,
+  publisher: portfolioData.personalInfo.name,
 
   robots: {
     index: true,
@@ -50,32 +56,30 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://ksatyam.online",
-    title: "Kumar Satyam — Full-Stack Developer | Portfolio",
-    description:
-      "META-certified Full-Stack Developer (React, Next.js, Node.js, TypeScript). 3.8+ years experience building scalable apps, dashboards & enterprise workflows.",
-    siteName: "Kumar Satyam Portfolio",
+    url: `https://${portfolioData.personalInfo.website}`,
+    title: `${portfolioData.personalInfo.name} — ${portfolioData.personalInfo.title}`,
+    description: portfolioData.personalInfo.shortBio,
+    siteName: `${portfolioData.personalInfo.name} Portfolio`,
     images: [
       {
-        url: "https://ksatyam.online/og-image.png",
+        url: `https://${portfolioData.personalInfo.website}/og-image.png`, // Ensure this image exists in public folder
         width: 1200,
         height: 630,
-        alt: "Kumar Satyam — Full-Stack Developer Portfolio",
+        alt: `${portfolioData.personalInfo.name} — Portfolio`,
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Kumar Satyam — Full-Stack Developer | Portfolio",
-    description:
-      "META-certified Software Engineer specializing in React, Next.js, Node.js & scalable enterprise solutions.",
-    images: ["https://ksatyam.online/og-image.png"],
-    creator: "@ksatyam",
+    title: `${portfolioData.personalInfo.name} — ${portfolioData.personalInfo.title}`,
+    description: portfolioData.personalInfo.shortBio,
+    images: [`https://${portfolioData.personalInfo.website}/og-image.png`],
+    creator: "@ksatyam", // Maintain hardcoded if not in data, or add to data interface
   },
 
   alternates: {
-    canonical: "https://ksatyam.online",
+    canonical: `https://${portfolioData.personalInfo.website}`,
   },
 
   icons: {
@@ -91,37 +95,18 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Kumar Satyam",
-    jobTitle: "Software Engineer | Full Stack Developer",
-    url: "https://ksatyam.online",
-    image: "https://ksatyam.online/profile.jpg",
+    name: portfolioData.personalInfo.name,
+    jobTitle: portfolioData.personalInfo.title,
+    url: `https://${portfolioData.personalInfo.website}`,
     sameAs: [
-      "https://linkedin.com/in/ksatyam4199",
-      "https://github.com/Satyam3472",
+      portfolioData.personalInfo.linkedin,
+      portfolioData.personalInfo.github,
     ],
-    worksFor: {
-      "@type": "Organization",
-      name: "Tata Technologies",
-    },
-    description:
-      "META-certified full-stack developer with expertise in React.js, Next.js, Node.js, TypeScript, Docker, Prisma, AWS & scalable enterprise applications.",
-    alumniOf: {
-      "@type": "CollegeOrUniversity",
-      name: "Shree Shankaracharya Group of Institutions",
-    },
+    description: portfolioData.personalInfo.shortBio,
     knowsAbout: [
-      "React.js",
-      "Next.js",
-      "Node.js",
-      "TypeScript",
-      "Docker",
-      "GraphQL",
-      "AWS",
-      "MongoDB",
-      "MySQL",
-      "Enterprise Solutions",
-      "Frontend Engineering",
-      "Full Stack Development",
+      ...portfolioData.skills.frontEnd,
+      ...portfolioData.skills.backEnd,
+      ...portfolioData.skills.toolsFrameworks,
     ],
   };
 
